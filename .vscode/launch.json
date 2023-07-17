@@ -1,0 +1,28 @@
+{
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "name": "Debug MockApiServer (MockApiServer)",
+            "program": "${workspaceFolder:assessment-swift-02-cv}/MockApiServer/.build/debug/MockApiServer",
+            "args": [],
+            "cwd": "${workspaceFolder:assessment-swift-02-cv}/MockApiServer",
+            "preLaunchTask": "swift: Build Debug MockApiServer (MockApiServer)"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "name": "Release MockApiServer (MockApiServer)",
+            "program": "${workspaceFolder:assessment-swift-02-cv}/MockApiServer/.build/release/MockApiServer",
+            "args": [],
+            "cwd": "${workspaceFolder:assessment-swift-02-cv}/MockApiServer",
+            "preLaunchTask": "swift: Build Release MockApiServer (MockApiServer)"
+        }
+    ]
+}

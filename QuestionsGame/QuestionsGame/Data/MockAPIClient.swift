@@ -28,7 +28,7 @@ struct MockAPIClient: APIClient {
         }
     }
 
-    func getQuestions(url: URL, forResource: String, completion: @escaping (Result<[Monster], Error>) -> Void) {
+    func getQuestions(url: URL, forResource: String, completion: @escaping (Result<[Question], Error>) -> Void) {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")

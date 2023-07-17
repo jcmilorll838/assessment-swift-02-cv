@@ -9,5 +9,10 @@ import Foundation
 
 enum AppActions {
   case setQuestions([Question])
-  case setSelected(Question?)
+  case setCurrent(Question?)
+  case setSelected(Category?)
+  case setTime(Int)
+  case setRunning(Bool)
+  case setCategoryScore(Int)
+  case setSelectedAnswer(Int)
 }

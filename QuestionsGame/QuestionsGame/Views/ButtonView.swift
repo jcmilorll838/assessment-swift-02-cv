@@ -1,8 +1,8 @@
 //
 //  ButtonView.swift
-//  BattleOfMonsters
+//  QuestionsGame
 //
-//  Created by Lukas Ferreira on 04/01/23.
+//  Created by Juan Rojas on 12/07/23.
 //
 
 import SwiftUI
@@ -13,18 +13,39 @@ struct ButtonView: View {
     let apiClient: APIClient = MockAPIClient()
     
     func isDisabled() -> Bool{
-        return store.state.selectedMonster == nil
+        return store.state.currentQuestion == nil
+    }
+    
+    func isLast(index: Int) -> Bool{
+        return index == (store.state.questionsByCategory.count - 1)
     }
     
     func buttonColor(disabled: Bool) -> Color? {
         return disabled ?
-            Color(hex: "#799A82") :
-            Color(hex: "#10782E")
+            Color(hex: "#BB86FC") :
+            Color(hex: "#6200EE")
+    }
+    
+    func getIndex() -> Int{
+        return store.state.questionsByCategory.firstIndex(where:{ $0.id == store.state.currentQuestion?.id}) ?? 0
     }
 
     var body: some View {
-        Button {} label: {
-            Text("Start Battle")
+        Button {
+            let index = getIndex()
+            if(!isLast(index: index)){
+                store.dispatch(.setCurrent(store.state.questionsByCategory[index+1]))
+            } else {
+                let questions = store.state.questionsByCategory
+                var score = 0
+                questions.forEach { question in
+                    score += question.score ?? 0
+                }
+                store.dispatch(.setCategoryScore(score))
+            }
+            
+        } label: {
+            Text(isLast(index:getIndex()) ? "Show score" : "Next Question")
                 .font(.system(size: 18, weight: .regular))
                 .frame(maxWidth: .infinity, maxHeight: 56)
         }
@@ -42,10 +63,13 @@ struct ButtonView_Previews: PreviewProvider {
         let previewStore: AppStore = {
             let store = AppStore.preview
             
-            let monsters = MonsterList().monsters
+            let questions = QuestionList().questions
+            let question = questions.randomElement()
+            let categories: [Category] = [Category(name: question!.category , imageUrl: question!.imageUrl )]
+      
             
-            store.dispatch(.setMonsters(monsters))
-            store.dispatch(.setSelected(monsters[0]))
+            store.dispatch(.setQuestions(questions))
+            store.dispatch(.setSelected(categories[0]))
             
             return store
         }()

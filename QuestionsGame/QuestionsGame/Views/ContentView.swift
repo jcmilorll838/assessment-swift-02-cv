@@ -25,16 +25,27 @@ struct ContentView: View {
                         .accessibilityIdentifier("SubTitleTextView")
 
                     CategoryListView()
-                        .padding(.bottom, 24)
+                        .padding(.bottom, 10)
                         .accessibilityIdentifier("CategoryListView")
 
-                    MonsterBattleCardListView()
-                        .padding(.bottom, 17)
-                        .accessibilityIdentifier("MonsterBattleCardListView")
+                    HStack(alignment: .center){
+                        Spacer()
+                        QuestionCardView(defaultName: "Question", question: store.state.currentQuestion, timeRemaining: store.state.timeRemaining
+                        )
+                        .accessibilityIdentifier("CurrentQuestionCard")
+                        Spacer()
+                    }
+                   
 
-                    ButtonView()
-                        .accessibilityIdentifier("StartButtonView")
-
+                    if store.state.showScore
+                    {
+                        ScoreView(score: String(store.state.categoryScore))
+                            .accessibilityIdentifier("ScoreView")
+                    } else {
+                        ButtonView()
+                            .accessibilityIdentifier("ActionButtonView")
+                    }
+                    
                     Spacer()
                 }
                 .padding(.all, 20)
@@ -48,11 +59,15 @@ struct ContentView: View {
             { (result) in
                 switch result {
                 case .success(let data):
+                    print(data)
                     let questions = (data as! [Question])
+                    print(questions)
                     store.dispatch(.setQuestions(questions))
-
                 case .failure:
-                    store.dispatch(.setQuestions([]))
+                    
+                    let questionsF = QuestionList().questions
+                    print(questionsF)
+                    store.dispatch(.setQuestions(questionsF))
                 }
             }
         }.animation(.spring())
@@ -62,14 +77,20 @@ struct ContentView: View {
 #if !TESTING
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        let store = AppStore(
-            initial: AppState(),
-            reducer: AppReducer
-        )
+        
+        let previewStore: AppStore = {
+            let store = AppStore.preview
+            
+            let questions = QuestionList().questions
+        
+            store.dispatch(.setQuestions(questions))
+            
+            return store
+        }()
         
         ContentView()
             .preferredColorScheme(.dark)
-            .environmentObject(store)
+            .environmentObject(previewStore)
     }
 }
 #endif

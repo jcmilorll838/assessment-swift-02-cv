@@ -7,31 +7,10 @@ public struct MockApiServer {
         let router = Router()
         router.all(middleware: BodyParser())
 
-        let services = BattleOfMonstersServices()
+        let services = QuestionsGameServices()
 
-        router.get("/monsters") { _, response, next in
-            services.getMonsters(forResource: "monsters"){ (result) in
-                switch result {
-                case .success(let data):
-                    response.send(data: data)
-                case .failure(let error):
-                    response.status(.badRequest)
-                    response.send(error.localizedDescription)
-
-                }
-            }
-        }
-
-        router.post("/battle") { request, response, next in
-            guard let body = request.body else {
-                response.status(.badRequest)
-                response.send("Missing Request Body")
-                return
-            }
-
-            let requestBody = body.asJSON as! [String : String?]
-
-            services.postBattle(body: requestBody){ (result) in
+        router.get("/questions") { _, response, next in
+            services.getQuestions(forResource: "questions"){ (result) in
                 switch result {
                 case .success(let data):
                     response.send(data: data)

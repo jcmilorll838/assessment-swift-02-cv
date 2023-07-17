@@ -1,8 +1,8 @@
 //
 //  Challenge2Tests.swift
-//  BattleOfMonsters
+//  QuestionsGame
 //
-//  Created by Lukas Ferreira on 07/01/23.
+//  Created by Juan Rojas on 12/07/23.
 //
 
 import XCTest

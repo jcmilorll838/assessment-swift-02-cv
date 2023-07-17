@@ -1,13 +1,13 @@
 //
-//  BattleOfMonstersUITestsLaunchTests.swift
-//  BattleOfMonstersUITests
+//  QuestionsGameUITestsLaunchTests.swift
+//  QuestionsGame
 //
-//  Created by Lukas Ferreira on 03/01/23.
+//  Created by Juan Rojas on 12/07/23.
 //
 
 import XCTest
 
-final class BattleOfMonstersUITestsLaunchTests: XCTestCase {
+final class QuestionsGameUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

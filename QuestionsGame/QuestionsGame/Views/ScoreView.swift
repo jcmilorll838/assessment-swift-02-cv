@@ -11,7 +11,7 @@ struct ScoreView: View {
     var score: String
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Score: \(score)!")
+            Text("Score: \(score)")
                 .lineLimit(26)
                 .font(.system(size: 22, weight: .regular))
                 .multilineTextAlignment(.leading)

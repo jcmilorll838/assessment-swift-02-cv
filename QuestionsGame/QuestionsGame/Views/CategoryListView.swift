@@ -31,9 +31,9 @@ struct CategoryListView_Previews: PreviewProvider {
         let previewStore: AppStore = {
             let store = AppStore.preview
             
-            let categories = CategoryList().categories
-            
-            store.dispatch(.setCategories(categories))
+            let questions = QuestionList().questions
+        
+            store.dispatch(.setQuestions(questions))
             
             return store
         }()

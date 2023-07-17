@@ -1,16 +1,16 @@
 //
 //  MockAPIClientTests.swift
-//  BattleOfMonstersTests
+//  QuestionsGame
 //
-//  Created by Lukas Ferreira on 06/01/23.
+//  Created by Juan Rojas on 12/07/23.
 //
 
 import XCTest
-@testable import BattleOfMonsters
+@testable import QuestionsGame
 
 class MockAPIClientTests: XCTestCase {
     var apiClient: APIClient!
-    var services = BattleOfMonstersServices()
+    var services = QuestionsGameServices()
     
     override func setUp() {
         self.apiClient = MockAPIClient()
@@ -32,18 +32,18 @@ class MockAPIClientTests: XCTestCase {
         }
     }
 
-    func testResultSuccessGetMonsters() {
-        let expectation = XCTestExpectation(description: "Return a list of 5 monsters")
+    func testResultSuccessGetQuestions() {
+        let expectation = XCTestExpectation(description: "Return a list of 25 questions")
 
-        let url = "http://yourserver.com/monsters"
+        let url = "http://yourserver.com/questions"
         
-        let forResource = "monsters"
+        let forResource = "questions"
         
         self.apiClient.sendRequest(url: url, method: "GET", body: nil, forResource: forResource){ (result) in
             switch result {
             case .success(let data):
-                let monsters = (data as! [Monster])
-                XCTAssertEqual(monsters.count, 5)
+                let questions = (data as! [Question])
+                XCTAssertEqual(questions.count, 25)
                 expectation.fulfill()
             case .failure(let error):
                 XCTFail("Expected to be a success but got a failure with \(error)")
@@ -53,10 +53,10 @@ class MockAPIClientTests: XCTestCase {
         wait(for: [expectation], timeout: 5)
     }
     
-    func testResulFailGetMonsters() {
+    func testResulFailGetQuestions() {
         let expectation = XCTestExpectation(description: "Throw an Error for an invalid file path")
 
-        let url = "http://yourserver.com/monsters"
+        let url = "http://yourserver.com/questions"
         
         let forResource = "unknownFile"
         
@@ -73,39 +73,5 @@ class MockAPIClientTests: XCTestCase {
         wait(for: [expectation], timeout: 5)
     }
     
-    func testResultSuccessPostBattleWithPlayerMonsterAsWinner() {
-        // TODO
-    }
     
-    func testResultSuccessPostBattleWithComputerMonsterAsWinner() {
-        // TODO
-    }
-
-    func testResultSuccessPostBattleTie() {
-        // TODO
-    }
-
-    func testResultFailPostBattleInvalidBody() {
-        // TODO
-    }
-    
-    func testResultFailPostBattleMissingMonster1ID() {
-        // TODO
-    }
-    
-    func testResultFailPostBattleMissingMonster2ID() {
-        // TODO
-    }
-    
-    func testResultFailPostBattleInvalidMonster1ID() {
-        // TODO
-    }
-    
-    func testResultFailPostBattleInvalidMonster2ID() {
-        // TODO
-    }
-    
-    func testResultFailPostBattleBothInvalidIDs() {
-        // TODO
-    }
 }
