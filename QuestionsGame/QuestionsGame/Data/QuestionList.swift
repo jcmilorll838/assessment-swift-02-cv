@@ -2,7 +2,7 @@
 //  QuestionList.swift
 //  QuestionsGame
 //
-//  Created by Milangas on 14/07/23.
+//  Created by Juan Rojas on 14/07/23.
 //
 
 import SwiftUI
