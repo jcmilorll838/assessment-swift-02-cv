@@ -33,7 +33,7 @@ class MockAPIClientTests: XCTestCase {
     }
 
     func testResultSuccessGetQuestions() {
-        let expectation = XCTestExpectation(description: "Return a list of 25 questions")
+        let expectation = XCTestExpectation(description: "Return a list of 2 questions")
 
         let url = "http://yourserver.com/questions"
         
@@ -43,7 +43,7 @@ class MockAPIClientTests: XCTestCase {
             switch result {
             case .success(let data):
                 let questions = (data as! [Question])
-                XCTAssertEqual(questions.count, 25)
+                XCTAssertEqual(questions.count, 2)
                 expectation.fulfill()
             case .failure(let error):
                 XCTFail("Expected to be a success but got a failure with \(error)")

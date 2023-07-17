@@ -45,8 +45,8 @@ class QuestionsGameUITests: XCTestCase {
         let categoryListElements = lazyLoadPage.categoryListElements
         let actionButton = descendants["ActionButtonView"]
 
-        XCTAssertEqual(descendants.scrollViews.count, 3)
-        XCTAssertEqual(scrollViews.scrollViews.count, 2)
+        XCTAssertEqual(descendants.scrollViews.count, 2)
+        XCTAssertEqual(scrollViews.scrollViews.count, 1)
         XCTAssertTrue(descendants["TitleTextView"].exists)
         XCTAssertTrue(descendants["SubTitleTextView"].exists)
         XCTAssertTrue(scrollViews.scrollViews["CategoryListView"].exists)

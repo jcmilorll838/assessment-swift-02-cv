@@ -24,5 +24,18 @@ extension DiceError: LocalizedError {
 }
 
 func diceFacesCalculator(dice1: Int, dice2: Int, dice3: Int) throws -> Int {
-    throw DiceError.OutOfRangeException
+    let dices = [dice1, dice2, dice3]
+    let isNotInRange: (Int) -> Bool = {dice in dice > 6 || dice < 1}
+    let isNotValidDice = dices.contains(where: isNotInRange)
+
+    if(isNotValidDice){
+        throw DiceError.OutOfRangeException
+    }
+
+    let repeatedValues = dices.filter {item in
+        dices.firstIndex(of: item) != dices.lastIndex(of: item)
+    }
+
+    return repeatedValues.isEmpty ? dices.max()! : repeatedValues[0] * repeatedValues.count 
+    
 }

@@ -90,9 +90,9 @@ class Challenge1Tests: XCTestCase {
         XCTAssertNotNil(values[.positives])
         XCTAssertEqual(values[.positives], floatFormat(number: 0.44))
         XCTAssertNotNil(values[.negative])
-        XCTAssertEqual(values[.negative], floatFormat(number: 0.833333))
+        XCTAssertEqual(values[.negative], floatFormat(number: 0.45))
         XCTAssertNotNil(values[.zeros])
-        XCTAssertEqual(values[.zeros], floatFormat(number: 0.166667))
+        XCTAssertEqual(values[.zeros], floatFormat(number: 0.11))
     }
     
     func testCase7() {
@@ -107,7 +107,7 @@ class Challenge1Tests: XCTestCase {
         XCTAssertNotNil(values[.positives])
         XCTAssertEqual(values[.positives], floatFormat(number: 0))
         XCTAssertNotNil(values[.negative])
-        XCTAssertEqual(values[.negative], floatFormat(number: 0.333333))
+        XCTAssertEqual(values[.negative], floatFormat(number: 0.833333))
         XCTAssertNotNil(values[.zeros])
         XCTAssertEqual(values[.zeros], floatFormat(number: 0.166667))
     }
